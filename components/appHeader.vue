@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header container">
     <div class="header__wrapper">
       <!-- Logo -->
       <NuxtLink to="/" class="header__logo">
@@ -60,14 +60,17 @@
         this.state = data.data.attributes.State;
         this.street = data.data.attributes.Street;
         this.zipCode = data.data.attributes.ZipCode;
-      });
+      })
+      .catch((error) => {}); 
 
       fetch('http://localhost:1337/api/contact')
       .then((response) => response.json())
       .then((data) => {
         this.email = data.data.attributes.Email;
         this.phone = data.data.attributes.PhoneNumber;
-      });
+      })
+      .catch((error) => { }); 
+
     }
   }
 </script>
@@ -75,7 +78,6 @@
 
 <style lang="scss" scoped>
   .header {
-    width: rvw(1320);
     background-color: transparent;
     position: fixed;
     padding: rvh(30) rvw(40) rvh(30) rvw(46);

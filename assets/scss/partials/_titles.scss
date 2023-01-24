@@ -14,7 +14,22 @@
 .t-center {text-align: center;}
 .t-right {text-align: right;}
 
+// Font families
+.font-1 {
+  font-family: $font-1;
+}
+
+.font-2 {
+  font-family: $font-2;
+  letter-spacing: rvw(2);
+}
+
 // Font sizes
+.t-134 {
+  font-size: rvw(120);
+  line-height: rvw(130);
+}
+
 .t-22 {
   font-size: rvw(22);
   line-height: rvw(26);

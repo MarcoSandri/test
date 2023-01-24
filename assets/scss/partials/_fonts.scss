@@ -1,4 +1,15 @@
 @font-face {
+    font-family: 'Wriggle';
+    src: url('/fonts/Wriggle-Regular.woff2') format('woff2'),
+        url('/fonts/Wriggle-Regular.woff') format('woff'),
+        url('/fonts/Wriggle-Regular.svg#Wriggle-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
     font-family: 'HK Grotesk';
     src: url('/fonts/HKGrotesk-Black.woff2') format('woff2'),
         url('/fonts/HKGrotesk-Black.woff') format('woff'),
