@@ -39,12 +39,12 @@
     data() {
       return {
         menu: false,
-        city: '',
-        state: '',
-        street: '',
-        zipCode: '',
-        email: '',
-        phone: ''
+        city: 'Portsmouth',
+        state: 'New Jersey',
+        street: '3548 Lafayette Rd',
+        zipCode: '03801',
+        email: 'hi@fakemail.net',
+        phone: '+24 603 501 478'
       }
     },
     methods: {
