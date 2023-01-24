@@ -1,0 +1,10 @@
+@function rvw($px-vw, $multiplier: 1)  {
+  $base-vw: 1440px;
+  $px: $px-vw * $multiplier  * 1px ;
+  @return calc($px * 100vw / $base-vw);
+}
+@function rvh($px-vh, $multiplier: 1)  {
+  $base-vh: 900px;
+  $px: $px-vh * $multiplier  * 1px ;
+  @return calc($px * 100vh / $base-vh);
+}
