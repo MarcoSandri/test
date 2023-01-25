@@ -1,5 +1,6 @@
 <template>
   <header class="header container">
+    <AppMenu :class="menu? 'opened' : ''"/>
     <div class="header__wrapper">
       <!-- Logo -->
       <NuxtLink to="/" class="header__logo">
@@ -61,7 +62,7 @@
         this.street = data.data.attributes.Street;
         this.zipCode = data.data.attributes.ZipCode;
       })
-      .catch((error) => {}); 
+      .catch((error) => {});
 
       fetch('http://localhost:1337/api/contact')
       .then((response) => response.json())
@@ -69,7 +70,7 @@
         this.email = data.data.attributes.Email;
         this.phone = data.data.attributes.PhoneNumber;
       })
-      .catch((error) => { }); 
+      .catch((error) => { });
 
     }
   }
@@ -83,6 +84,7 @@
     padding: rvh(30) rvw(40) rvh(30) rvw(46);
     top: 0;
     left: 0;
+    z-index: 1;
 
     &__wrapper {
       display: flex;
@@ -114,6 +116,7 @@
     &__menu {
       &.hamburger {
         $iconSize: rvw(44);
+        z-index: 3;
         display: inline-block;
         width: $iconSize;
         height: $iconSize;
