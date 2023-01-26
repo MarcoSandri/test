@@ -52,15 +52,15 @@
         let marqueeWrapper = document.querySelector('.home-hero__marquee-wrapper')
 
         setTimeout(() => {
-          console.log(marqueeContainer.clientHeight)
           console.log(marquee.clientHeight)
 
           while(marqueeContainer.clientHeight > marqueeWrapper.clientHeight) {
             let clone = marquee.cloneNode(true);
-            console.log();
             marqueeWrapper.appendChild(clone)
-            gsap.to(marqueeWrapper, {yPercent: 100, duration: 4, ease:'none'});
           }
+          let clone = marquee.cloneNode(true);
+          marqueeWrapper.appendChild(clone)
+          gsap.to(marqueeWrapper, {y: -marquee.clientHeight, duration: 4, ease:'none', repeat: -1});
         }, 100);
       }
     }
@@ -102,6 +102,7 @@
       flex-grow: 1;
       color: $white;
       background-color: $black;
+      max-height: rvh(1300);
 
       p {
         min-height: fit-content;
