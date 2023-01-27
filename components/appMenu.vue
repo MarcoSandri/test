@@ -2,12 +2,12 @@
   <div class="menu">
     <div class="menu__wrapper">
       <div class="menu__items">
-        <NuxtLink to="/" class="t-80 menu__item">Home</NuxtLink>
-        <NuxtLink class="t-80 menu__item">Projects</NuxtLink>
-        <NuxtLink to="/about" class="t-80 menu__item">About</NuxtLink>
-        <NuxtLink class="t-80 menu__item">Posts</NuxtLink>
-        <NuxtLink class="t-80 menu__item">Shop</NuxtLink>
-        <NuxtLink class="t-80 menu__item">Contacts</NuxtLink>
+        <NuxtLink @click="removeOpen()" to="/" class="t-80 menu__item">Home</NuxtLink>
+        <NuxtLink @click="removeOpen()" class="t-80 menu__item">Projects</NuxtLink>
+        <NuxtLink @click="removeOpen()" to="/about" class="t-80 menu__item">About</NuxtLink>
+        <NuxtLink @click="removeOpen()" class="t-80 menu__item">Posts</NuxtLink>
+        <NuxtLink @click="removeOpen()" class="t-80 menu__item">Shop</NuxtLink>
+        <NuxtLink @click="removeOpen()" class="t-80 menu__item">Contacts</NuxtLink>
       </div>
       <img class="menu__logo" src="/svg/logo-white-icon.svg" alt="logo">
     </div>
@@ -23,6 +23,9 @@ export default {
     }
   },
   methods: {
+    removeOpen(){
+      this.$emit('closeMenu', false)
+    },
     logoAnim() {
       let menuItems = document.querySelectorAll('.menu__item');
       menuItems.forEach(item => {

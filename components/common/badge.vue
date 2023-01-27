@@ -16,6 +16,8 @@
           </textPath>
         </text>
       </svg>
+
+      <img src="/svg/logo-white-icon.svg" alt="logo">
     </div>
   </div>
 </template>
@@ -96,6 +98,13 @@ export default {
       height: rvw(120);
       border-radius: 50%;
       background-color: $secondary;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: rvw(60);
+      }
     }
   }
 </style>

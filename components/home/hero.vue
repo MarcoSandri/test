@@ -83,12 +83,12 @@
     }
 
     &__bottom {
-      padding-top: rvh(20);
       display: flex;
       justify-content: space-between;
       align-items: center;
       img {
         width: rvw(680);
+        margin-left: rvw(60);
       }
     }
 

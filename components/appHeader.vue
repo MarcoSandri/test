@@ -1,6 +1,6 @@
 <template>
   <header class="header container">
-    <AppMenu :class="menu? 'opened' : ''"/>
+    <AppMenu @closeMenu="clickedLink" :class="menu? 'opened' : ''"/>
     <div class="header__wrapper">
       <!-- Logo -->
       <NuxtLink to="/" class="header__logo">
@@ -51,6 +51,9 @@
     methods: {
       toggleMenu() {
         this.menu = !this.menu;
+      },
+      clickedLink(value) {
+        this.menu = value
       }
     },
     async mounted() {

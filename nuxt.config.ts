@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       cmsUrl: 'http://localhost:1337',
+      menu: false,
     }
   },
   vite: {
