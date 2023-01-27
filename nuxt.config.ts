@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   css: ['@/assets/scss/resetcss.scss'],
   runtimeConfig: {
     public: {
-      cmsUrl: 'http://localhost:1337',
+      cmsUrl: 'http://192.168.1.66:1337',
       menu: false,
     }
   },

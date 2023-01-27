@@ -1,6 +1,6 @@
 <template>
-  <main>
-    <CommonHero v-if="heroText" :heroText="heroText" :heroCover="heroCover" :sideText="email"/>
+  <main class="about">
+    <CommonHero v-if="heroText" :heroText="heroText" :heroCover="heroCover" :sideText="title"/>
   </main>
 </template>
 
@@ -10,8 +10,8 @@ export default {
     return {
       heroText: null,
       heroCover: null,
-      email: null,
-      slug: 'home'
+      title: null,
+      slug: 'projects'
     }
   },
   async mounted() {
@@ -22,16 +22,9 @@ export default {
     .then((data) => {
       this.heroText = data.data[0].attributes.hero.HeroText;
       this.heroCover = pageEndpoint + data.data[0].attributes.hero.HeroCover.data.attributes.url;
+      this.title = data.data[0].attributes.Title
     })
     .catch((error) => {});
-
-    fetch(`${pageEndpoint}/api/contact`)
-    .then((response) => response.json())
-    .then((data) => {
-      this.email = data.data.attributes.Email;
-
-    })
-    .catch((error) => { });
   }
 }
 </script>

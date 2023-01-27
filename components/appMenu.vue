@@ -2,12 +2,17 @@
   <div class="menu">
     <div class="menu__wrapper">
       <div class="menu__items">
-        <NuxtLink @click="removeOpen()" to="/" class="t-80 menu__item">Home</NuxtLink>
-        <NuxtLink @click="removeOpen()" class="t-80 menu__item">Projects</NuxtLink>
-        <NuxtLink @click="removeOpen()" to="/about" class="t-80 menu__item">About</NuxtLink>
-        <NuxtLink @click="removeOpen()" class="t-80 menu__item">Posts</NuxtLink>
-        <NuxtLink @click="removeOpen()" class="t-80 menu__item">Shop</NuxtLink>
-        <NuxtLink @click="removeOpen()" class="t-80 menu__item">Contacts</NuxtLink>
+        <NuxtLink
+          v-for="(menuItem, index) in menuItems"
+          :key="index"
+          :to="menuItem.page.data.attributes.Slug == 'home'? '/' : '/'+menuItem.page.data.attributes.Slug"
+          @click="removeOpen"
+          @mousemove="itemMove"
+          @mouseleave="itemLeave"
+          class="t-80 menu__item">
+            {{ menuItem.Label }}
+        </NuxtLink>
+
       </div>
       <img class="menu__logo" src="/svg/logo-white-icon.svg" alt="logo">
     </div>
@@ -19,33 +24,36 @@ import { gsap } from "gsap";
 export default {
   data() {
     return {
-
+      menuItems : null
     }
   },
   methods: {
     removeOpen(){
       this.$emit('closeMenu', false)
     },
-    logoAnim() {
-      let menuItems = document.querySelectorAll('.menu__item');
-      menuItems.forEach(item => {
-        item.addEventListener('mousemove',(e) => {
-          let screenWidth = window.innerWidth / 2;
-          let screenHeight = window.innerHeight / 2;
+    itemMove(e) {
+      let screenWidth = window.innerWidth / 2;
+      let screenHeight = window.innerHeight / 2;
 
-          let xPos = (e.clientX - screenWidth) / 5
-          let yPos = (e.clientY - screenHeight) / 5
+      let xPos = (e.clientX - screenWidth) / 5
+      let yPos = (e.clientY - screenHeight) / 5
 
-          gsap.to('.menu__logo', {x: xPos, y: yPos})
-        })
-        item.addEventListener('mouseleave', () => {
-          gsap.to('.menu__logo', {x: 0, y: 0})
-        })
-      });
-    }
+      gsap.to('.menu__logo', {x: xPos, y: yPos})
+    },
+    itemLeave() {
+      gsap.to('.menu__logo', {x: 0, y: 0})
+    },
   },
   async mounted() {
-    this.logoAnim()
+
+    const pageEndpoint = useRuntimeConfig().public.cmsUrl;
+
+    fetch(`${pageEndpoint}/api/menu?populate=*&populate=Link.page`)
+    .then((response) => response.json())
+    .then((data) => {
+      this.menuItems = data.data.attributes.Link
+    })
+    .catch((error) => {});
   }
 }
 

@@ -57,7 +57,9 @@
       }
     },
     async mounted() {
-      fetch('http://localhost:1337/api/address')
+      const pageEndpoint = useRuntimeConfig().public.cmsUrl;
+
+      fetch(`${pageEndpoint}/api/address`)
       .then((response) => response.json())
       .then((data) => {
         this.city = data.data.attributes.City;
@@ -67,7 +69,7 @@
       })
       .catch((error) => {});
 
-      fetch('http://localhost:1337/api/contact')
+      fetch(`${pageEndpoint}/api/contact`)
       .then((response) => response.json())
       .then((data) => {
         this.email = data.data.attributes.Email;
