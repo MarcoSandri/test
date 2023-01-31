@@ -18,14 +18,15 @@ export default {
       heroText: null,
       heroCover: null,
       title: null,
-      slug: 'posts',
+      template: 'posts',
       posts: null,
     }
   },
   async mounted() {
     const pageEndpoint = useRuntimeConfig().public.cmsUrl;
+    const currentLanguage = useRuntimeConfig().public.currentLang;
 
-    fetch(`${pageEndpoint}/api/pages?filters[Slug][$eq]=${this.slug}&populate=*&populate=hero.HeroCover`)
+    fetch(`${pageEndpoint}/api/pages?filters[Template][$eq]=${this.template}&populate=*&populate=hero.HeroCover&locale=${currentLanguage}`)
     .then((response) => response.json())
     .then((data) => {
       this.heroText = data.data[0].attributes.hero.HeroText;

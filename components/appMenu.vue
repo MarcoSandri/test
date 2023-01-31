@@ -5,7 +5,7 @@
         <NuxtLink
           v-for="(menuItem, index) in menuItems"
           :key="index"
-          :to="menuItem.page.data.attributes.Slug == 'home'? '/' : '/'+menuItem.page.data.attributes.Slug"
+          :to="menuItem.page.data.attributes.Slug == 'home'? '/' : '/' + menuItem.page.data.attributes.Template"
           @click="removeOpen"
           @mousemove="itemMove"
           @mouseleave="itemLeave"
@@ -15,6 +15,7 @@
 
       </div>
       <img class="menu__logo" src="/svg/logo-white-icon.svg" alt="logo">
+      <CommonLanguageSelector class="menu__language"/>
     </div>
   </div>
 </template>
@@ -136,6 +137,12 @@ export default {
           transform: translate(-50%, -50%);
         }
       }
+    }
+
+    &__language {
+      position: absolute;
+      top: rvh(20);
+      left: rvw(20);
     }
   }
 </style>
