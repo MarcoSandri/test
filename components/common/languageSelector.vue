@@ -1,11 +1,27 @@
 <template>
   <div class="language-selector t-uppercase t-bold t-22">
-    <div class="language-selector__current" @click="open = !open"> {{ currentLang }} </div>
+    <div class="language-selector__current" @click="open = !open"> {{ $i18n.locale }} </div>
     <ul class="language-selector__list" v-if="open">
-      <li class="language-selector__item" v-for="(language, index) in languages" :key="index" @click="changeLang">{{ language.code }}</li>
+
+      <li class="language-selector__item" v-for="locale in $i18n.locales" :key="locale" @click="this.open = !this.open">
+        <NuxtLink
+        class="lang-selector__item"
+        :class="{'active': locale === $i18n.locale}"
+        :to="switchLocalePath(locale)"
+        >
+          {{ locale }}
+       </NuxtLink>
+      </li>
     </ul>
   </div>
 </template>
+
+
+<script setup>
+
+
+
+</script>
 
 <script>
   export default {
@@ -28,13 +44,6 @@
       .catch((error) => {});
 
     },
-    methods: {
-      changeLang() {
-        this.currentLang = event.target.innerHTML;
-        useRuntimeConfig().public.currentLang = event.target.innerHTML;
-        this.open = !this.open
-      }
-    }
   }
 </script>
 

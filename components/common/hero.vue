@@ -37,7 +37,6 @@ export default {
       let marqueeWrapper = document.querySelector('.hero__marquee-wrapper')
 
       setTimeout(() => {
-        console.log(marquee.clientHeight)
 
         while(marqueeContainer.clientHeight > marqueeWrapper.clientHeight) {
           let clone = marquee.cloneNode(true);

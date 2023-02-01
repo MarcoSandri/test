@@ -1,5 +1,6 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+
 export default defineNuxtConfig({
+  ssr: true,
   modules: [
     '@nuxtjs/i18n',
     '@nuxtjs/strapi'
@@ -14,6 +15,17 @@ export default defineNuxtConfig({
   i18n: {
     locales: ['en', 'it'],
     defaultLocale: 'en',
+    vueI18n: {
+      fallbackLocale: 'en',
+      messages: {
+        en: {
+          welcome: 'Welcome'
+        },
+        it: {
+          welcome: 'Benvenuto'
+        }
+      }
+    }
   },
   css: ['@/assets/scss/resetcss.scss'],
   runtimeConfig: {
