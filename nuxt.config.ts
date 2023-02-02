@@ -13,19 +13,9 @@ export default defineNuxtConfig({
     cookieName: 'strapi_jwt',
   },
   i18n: {
+    strategy: 'prefix_except_default',
     locales: ['en', 'it'],
     defaultLocale: 'en',
-    vueI18n: {
-      fallbackLocale: 'en',
-      messages: {
-        en: {
-          welcome: 'Welcome'
-        },
-        it: {
-          welcome: 'Benvenuto'
-        }
-      }
-    }
   },
   css: ['@/assets/scss/resetcss.scss'],
   runtimeConfig: {

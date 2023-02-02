@@ -3,14 +3,12 @@
     <div class="language-selector__current" @click="open = !open"> {{ $i18n.locale }} </div>
     <ul class="language-selector__list" v-if="open">
 
-      <li class="language-selector__item" v-for="locale in $i18n.locales" :key="locale" @click="this.open = !this.open">
-        <NuxtLink
-        class="lang-selector__item"
-        :class="{'active': locale === $i18n.locale}"
-        :to="switchLocalePath(locale)"
-        >
+      <li class="language-selector__item" v-for="locale in availableLocales" :key="locale" @click="this.open = !this.open">
+
+        <NuxtLink :to="switchLocalePath(locale)" class="lang-selector__item">
           {{ locale }}
-       </NuxtLink>
+        </NuxtLink>
+
       </li>
     </ul>
   </div>
@@ -18,31 +16,19 @@
 
 
 <script setup>
-
-
-
+  const { locale, locales } = useI18n()
+  const switchLocalePath = useSwitchLocalePath()
+  const availableLocales = computed(() => {
+    return (locales.value).filter(i => i.code !== locale.value)
+  })
 </script>
 
 <script>
   export default {
     data() {
       return {
-        languages: null,
-        currentLang: null,
         open: false
       }
-    },
-    async mounted() {
-      const pageEndpoint = useRuntimeConfig().public.cmsUrl;
-      this.currentLang = useRuntimeConfig().public.currentLang;
-
-      fetch(`${pageEndpoint}/api/i18n/locales`)
-      .then((response) => response.json())
-      .then((data) => {
-        this.languages = data
-      })
-      .catch((error) => {});
-
     },
   }
 </script>

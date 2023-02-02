@@ -3,7 +3,7 @@
     <AppMenu @closeMenu="clickedLink" :class="menu? 'opened' : ''"/>
     <div class="header__wrapper">
       <!-- Logo -->
-      <NuxtLink to="/" class="header__logo">
+      <NuxtLink :to="localePath('/')" class="header__logo">
         <img src="/svg/logo-white.svg" alt="logo">
       </NuxtLink>
 
@@ -34,6 +34,10 @@
     </div>
   </header>
 </template>
+
+<script setup>
+
+</script>
 
 <script>
   export default {

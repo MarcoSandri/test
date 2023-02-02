@@ -1,34 +1,34 @@
 <template>
   <main class="about">
-    <CommonHero v-show="data.data" :heroText="data.data[0].attributes.hero.HeroText" :heroCover="pageEndpoint + data.data[0].attributes.hero.HeroCover.data.attributes.url" :sideText="data.data[0].attributes.Title"/>
+    <CommonHero v-show="data.data" :heroText="data.data[0].attributes.hero.HeroText" :heroCover="useStrapiMedia(data.data[0].attributes.hero.HeroCover.data.attributes.url)" :sideText="data.data[0].attributes.Title"/>
   </main>
 </template>
 
 <script setup>
+  const media = useStrapiMedia()
 
-  const pageEndpoint = useRuntimeConfig().public.cmsUrl;
-  const currentLanguage = useRuntimeConfig().public.currentLang;
-
-  const route = useRoute();
-
+  const { locale, locales } = useI18n()
   const { find } = useStrapi()
   const { data, pending, refresh, error } = await useAsyncData(
     'pages',
     () => find('pages', {
-      locale: currentLanguage,
-      populate: ['hero', 'hero.HeroCover'],
+      locale: locale.value,
+      populate: ['hero', 'hero.HeroCover', 'seo'],
       filters: {
         'Template' : 'about',
       }
     })
   )
-    console.log(route.name)
-    console.log(route.fullPath)
-    console.log(route.hash)
-    console.log(route.matched)
-    console.log(route.meta)
-    console.log(route.path)
-    console.log(route.redirectedFrom)
+
+  //Seo
+  const seo = data.value.data[0].attributes.seo
+  useHead({
+  title: seo.metaTitle,
+  meta: [
+    { name: 'description', content: seo.metaDescription }
+  ],
+})
+
 </script>
 
 <script>
@@ -42,4 +42,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 </style>

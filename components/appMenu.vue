@@ -3,9 +3,9 @@
     <div class="menu__wrapper">
       <div class="menu__items">
         <NuxtLink
-          v-for="(menuItem, index) in menuItems"
+          v-for="(menuItem, index) in data.data.attributes.Link"
           :key="index"
-          :to="menuItem.page.data.attributes.Slug == 'home'? '/' : '/' + menuItem.page.data.attributes.Template"
+          :to="localePath(`${(menuItem.page.data.attributes.Slug == 'home' || menuItem.page.data.attributes.Slug ==  'home-ita')? '/' : '/' + menuItem.page.data.attributes.Template}`)"
           @click="removeOpen"
           @mousemove="itemMove"
           @mouseleave="itemLeave"
@@ -19,6 +19,22 @@
     </div>
   </div>
 </template>
+
+
+<script setup>
+const localePath = useLocalePath()
+const { locale, locales } = useI18n()
+
+  const { find } = useStrapi()
+  const { data, pending, refresh, error } = await useAsyncData(
+    'menu',
+    () => find('menu', {
+      populate: ['*', 'Link.page'],
+      locale: locale.value,
+    })
+  )
+
+</script>
 
 <script>
 import { gsap } from "gsap";

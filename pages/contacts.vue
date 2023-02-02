@@ -1,32 +1,41 @@
 <template>
-  <main class="about">
-    <CommonHero v-if="heroText" :heroText="heroText" :heroCover="heroCover" :sideText="title"/>
+  <main class="contacts">
+    <CommonHero v-show="data.data" :heroText="data.data[0].attributes.hero.HeroText" :heroCover="useStrapiMedia(data.data[0].attributes.hero.HeroCover.data.attributes.url)" :sideText="data.data[0].attributes.Title"/>
   </main>
 </template>
+
+<script setup>
+
+  const { locale, locales } = useI18n()
+  const { find } = useStrapi()
+  const { data, pending, refresh, error } = await useAsyncData(
+    'pages',
+    () => find('pages', {
+      locale: locale.value,
+      populate: ['hero', 'hero.HeroCover', 'seo'],
+      filters: {
+        'Template' : 'contacts',
+      }
+    })
+  )
+
+  //Seo
+  const seo = data.value.data[0].attributes.seo
+  useHead({
+  title: seo.metaTitle,
+  meta: [
+    { name: 'description', content: seo.metaDescription }
+  ],
+})
+
+</script>
 
 <script>
 export default {
   data() {
     return {
-      heroText: null,
-      heroCover: null,
-      title: null,
-      template: 'contacts'
     }
   },
-  async mounted() {
-    const pageEndpoint = useRuntimeConfig().public.cmsUrl;
-    const currentLanguage = useRuntimeConfig().public.currentLang;
-
-    fetch(`${pageEndpoint}/api/pages?filters[Template][$eq]=${this.template}&populate=*&populate=hero.HeroCover&locale=${currentLanguage}`)
-    .then((response) => response.json())
-    .then((data) => {
-      this.heroText = data.data[0].attributes.hero.HeroText;
-      this.heroCover = pageEndpoint + data.data[0].attributes.hero.HeroCover.data.attributes.url;
-      this.title = data.data[0].attributes.Title
-    })
-    .catch((error) => {});
-  }
 }
 </script>
 
