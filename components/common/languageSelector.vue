@@ -3,10 +3,10 @@
     <div class="language-selector__current" @click="open = !open"> {{ $i18n.locale }} </div>
     <ul class="language-selector__list" v-if="open">
 
-      <li class="language-selector__item" v-for="locale in availableLocales" :key="locale" @click="this.open = !this.open">
+      <li class="language-selector__item" v-for="locale in availableLocales" :key="locale.code" @click="this.open = !this.open">
 
-        <NuxtLink :to="switchLocalePath(locale)" class="lang-selector__item">
-          {{ locale }}
+        <NuxtLink :to="switchLocalePath(locale.code)" class="lang-selector__item">
+          {{ locale.code }}
         </NuxtLink>
 
       </li>

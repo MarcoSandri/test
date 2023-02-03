@@ -1,3 +1,4 @@
+import getLocales from './plugins/locales.server';
 
 export default defineNuxtConfig({
   ssr: true,
@@ -14,7 +15,17 @@ export default defineNuxtConfig({
   },
   i18n: {
     strategy: 'prefix_except_default',
-    locales: ['en', 'it'],
+    locales: [
+      {
+        code: 'en',
+        file: 'en.json'
+      },
+      {
+        code: 'it',
+        file: 'it.json'
+      },
+    ],
+    langDir: 'assets/i18n',
     defaultLocale: 'en',
   },
   css: ['@/assets/scss/resetcss.scss'],

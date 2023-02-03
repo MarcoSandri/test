@@ -6,6 +6,7 @@
 
 <script setup>
   const media = useStrapiMedia()
+  const route = useRoute()
 
   const { locale, locales } = useI18n()
   const { find } = useStrapi()

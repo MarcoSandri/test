@@ -1,11 +1,22 @@
+let strapiLocales = {
+  locales: [],
+  defaultLocale : ''
+};
 export default async function getLocales() {
-  let localesList = [];
-  fetch('http://192.168.1.66:1337/api/i18n/locales')
+  fetch('http://localhost:1337/api/i18n/locales')
   .then((response) => response.json())
-  .then((data) =>{
-    localesList = data;
-    console.log(data)
-    console.log('lista locales' + localesList)
+  .then((data) => {
+    data.forEach(item => {
+      strapiLocales.locales.push(
+        {
+          code: item.code,
+          file: `${item.code}.json`
+        }
+      )
+      if(item.isDefault) strapiLocales.defaultLocale = item.code;
+    });
   });
 
+  console.log(strapiLocales)
+  return strapiLocales;
 }

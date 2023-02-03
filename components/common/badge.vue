@@ -12,7 +12,7 @@
         </defs>
         <text>
           <textPath xlink:href="#circle">
-            {{ text }}
+            {{ $t('circleText') }}
           </textPath>
         </text>
       </svg>
