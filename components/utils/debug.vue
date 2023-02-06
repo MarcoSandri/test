@@ -60,10 +60,10 @@
     max-width: 500px;
     overflow: scroll;
   }
-  .debug >>> .string { color: green; }
-  .debug >>> .number { color: darkorange; }
-  .debug >>> .boolean { color: blue; }
-  .debug >>> .null { color: magenta; }
-  .debug >>> .key { color: red; }
+  .debug:deep(.string) { color: green; }
+  .debug:deep(.number) { color: darkorange; }
+  .debug:deep(.boolean) { color: blue; }
+  .debug:deep(.null) { color: magenta; }
+  .debug:deep(.key) { color: red; }
 
 </style>

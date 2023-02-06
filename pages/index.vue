@@ -1,10 +1,13 @@
 <template>
   <main>
     <CommonHero v-show="data.data" :heroText="data.data[0].attributes.hero.HeroText" :heroCover="useStrapiMedia(data.data[0].attributes.hero.HeroCover.data.attributes.url)" :sideText="data.data[0].attributes.Title"/>
+
   </main>
 </template>
 
 <script setup>
+  const route = useRoute()
+  console.log(route)
   const url = useStrapiUrl()
 
   const { locale, locales } = useI18n()

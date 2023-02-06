@@ -17,6 +17,6 @@ export default async function getLocales() {
     });
   });
 
-  console.log(strapiLocales)
+  // console.log(strapiLocales)
   return strapiLocales;
 }

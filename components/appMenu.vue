@@ -5,14 +5,13 @@
         <NuxtLink
           v-for="(menuItem, index) in data.data.attributes.Link"
           :key="index"
-          :to="localePath(`${(menuItem.page.data.attributes.Slug == 'home' || menuItem.page.data.attributes.Slug ==  'home-ita')? '/' : '/' + menuItem.page.data.attributes.Template}`)"
+          :to="localePath('/' + menuItem.page.data.attributes.Template)"
           @click="removeOpen"
           @mousemove="itemMove"
           @mouseleave="itemLeave"
           class="t-80 menu__item">
             {{ menuItem.Label }}
         </NuxtLink>
-
       </div>
       <img class="menu__logo" src="/svg/logo-white-icon.svg" alt="logo">
       <CommonLanguageSelector class="menu__language"/>

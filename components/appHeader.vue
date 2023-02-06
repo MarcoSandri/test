@@ -8,14 +8,14 @@
       </NuxtLink>
 
       <div class="header__address t-22 t-right">
-        <div class="header__block" :v-if="street != ''">
-          <p>{{ street }}</p>
-          <p>{{ city }}, {{ state }} {{ zipCode }}</p>
+        <div class="header__block" :v-show="address.Street != ''">
+          <p>{{ address.Street }}</p>
+          <p>{{ address.City }}, {{ address.State }} {{ address.ZipCode }}</p>
         </div>
 
-        <div class="header__block" :v-if="phone != ''">
-          <p><a :href="'mailto:' + email">{{ email }}</a></p>
-          <p><a :href="'tel:' + phone.replace(/\+|\ /g,'')">{{ phone }}</a></p>
+        <div class="header__block" :v-show="contact.PhoneNumber != ''">
+          <p><a :href="'mailto:' + contact.Email">{{ contact.Email }}</a></p>
+          <p><a :href="'tel:' + contact.PhoneNumber.replace(/\+|\ /g,'')">{{ contact.PhoneNumber }}</a></p>
         </div>
       </div>
 
@@ -36,6 +36,19 @@
 </template>
 
 <script setup>
+  const localePath = useLocalePath()
+  const { findOne } = useStrapi()
+  const { data: addressApi, addressPending, addressRefresh, addressError } = await useAsyncData(
+    'address',
+    () => findOne('address')
+  )
+  const address = addressApi.value.data.attributes;
+
+  const { data: contactApi, contactPending, contactRefresh, contactError } = await useAsyncData(
+    'contact',
+    () => findOne('contact')
+  )
+  const contact = contactApi.value.data.attributes;
 
 </script>
 
@@ -44,12 +57,6 @@
     data() {
       return {
         menu: false,
-        city: 'Portsmouth',
-        state: 'New Jersey',
-        street: '3548 Lafayette Rd',
-        zipCode: '03801',
-        email: 'hi@fakemail.net',
-        phone: '+24 603 501 478'
       }
     },
     methods: {
@@ -60,28 +67,6 @@
         this.menu = value
       }
     },
-    async mounted() {
-      const pageEndpoint = useRuntimeConfig().public.cmsUrl;
-
-      fetch(`${pageEndpoint}/api/address`)
-      .then((response) => response.json())
-      .then((data) => {
-        this.city = data.data.attributes.City;
-        this.state = data.data.attributes.State;
-        this.street = data.data.attributes.Street;
-        this.zipCode = data.data.attributes.ZipCode;
-      })
-      .catch((error) => {});
-
-      fetch(`${pageEndpoint}/api/contact`)
-      .then((response) => response.json())
-      .then((data) => {
-        this.email = data.data.attributes.Email;
-        this.phone = data.data.attributes.PhoneNumber;
-      })
-      .catch((error) => { });
-
-    }
   }
 </script>
 
