@@ -1,47 +1,48 @@
 <template>
   <main class="about">
-    <CommonHero v-show="data.data" :heroText="data.data[0].attributes.hero.HeroText" :heroCover="useStrapiMedia(data.data[0].attributes.hero.HeroCover.data.attributes.url)" :sideText="data.data[0].attributes.Title"/>
+    <CommonHero
+      v-show="data.data"
+      :heroText="data.data[0].attributes.hero.HeroText"
+      :heroCover="
+        useStrapiMedia(
+          data.data[0].attributes.hero.HeroCover.data.attributes.url
+        )
+      "
+      :sideText="data.data[0].attributes.Title"
+    />
   </main>
 </template>
 
 <script setup>
-  const media = useStrapiMedia()
-  const route = useRoute()
+const media = useStrapiMedia();
+const route = useRoute();
 
-  const { locale, locales } = useI18n()
-  const { find } = useStrapi()
-  const { data, pending, refresh, error } = await useAsyncData(
-    'pages',
-    () => find('pages', {
-      locale: locale.value,
-      populate: ['hero', 'hero.HeroCover', 'seo'],
-      filters: {
-        'Template' : 'about',
-      }
-    })
-  )
+const { locale, locales } = useI18n();
+const { find } = useStrapi();
+const { data, pending, refresh, error } = await useAsyncData("pages", () =>
+  find("pages", {
+    locale: locale.value,
+    populate: ["hero", "hero.HeroCover", "seo"],
+    filters: {
+      Template: "about",
+    },
+  })
+);
 
-  //Seo
-  const seo = data.value.data[0].attributes.seo
-  useHead({
+//Seo
+const seo = data.value.data[0].attributes.seo;
+useHead({
   title: seo.metaTitle,
-  meta: [
-    { name: 'description', content: seo.metaDescription }
-  ],
-})
-
+  meta: [{ name: "description", content: seo.metaDescription }],
+});
 </script>
 
 <script>
 export default {
   data() {
-    return {
-
-    }
+    return {};
   },
-}
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
