@@ -1,6 +1,6 @@
 <template>
   <div>
-    default
+    Contacts
     <AppHeader />
     <slot />
     <AppFooter />

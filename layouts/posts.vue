@@ -1,6 +1,6 @@
 <template>
   <div>
-    default
+    posts
     <AppHeader />
     <slot />
     <AppFooter />

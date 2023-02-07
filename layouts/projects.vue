@@ -1,6 +1,6 @@
 <template>
   <div>
-    default
+    projects
     <AppHeader />
     <slot />
     <AppFooter />

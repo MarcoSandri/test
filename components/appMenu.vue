@@ -2,15 +2,7 @@
   <div class="menu">
     <div class="menu__wrapper">
       <div class="menu__items">
-        <NuxtLink
-          v-for="(menuItem, index) in data.data.attributes.Link"
-          :key="index"
-          :to="localePath('/' + menuItem.page.data.attributes.Template)"
-          @click="removeOpen"
-          @mousemove="itemMove"
-          @mouseleave="itemLeave"
-          class="t-80 menu__item"
-        >
+        <NuxtLink v-for="(menuItem, index) in data.data.attributes.Link" :key="index" :to="localePath('/' + menuItem.page.data.attributes.Slug)" @click="removeOpen" @mousemove="itemMove" @mouseleave="itemLeave" class="t-80 menu__item">
           {{ menuItem.Label }}
         </NuxtLink>
       </div>
