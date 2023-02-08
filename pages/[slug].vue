@@ -21,10 +21,11 @@ const { data, pending, refresh, error } = await useAsyncData("page", () =>
 );
 
 console.log(data.value.data.attributes.Template);
-
+const layout = data.value.data.attributes.Template;
+console.log(layout);
 // Definisco il layout
 definePageMeta({
-  layout: data.value.data.attributes.Template || "default",
+  layout: "about",
 });
 
 // // Seo
